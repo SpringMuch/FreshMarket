@@ -79,55 +79,63 @@ namespace WebBanHangOnline.Controllers
                     OrderDetails = new List<OrderDetail>()
                 };
 
-                // **BẮT ĐẦU NÂNG CẤP XỬ LÝ LỖI**
-                using (var transaction = _context.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        // Thêm đơn hàng vào context
-                        _context.Orders.Add(finalOrder);
-                        // Lưu lại để lấy được OrderId cho các OrderDetail
-                        await _context.SaveChangesAsync();
+                // **BẮT ĐẦU GIẢI PHÁP MỚI VỚI EXECUTION STRATEGY**
+                var strategy = _context.Database.CreateExecutionStrategy();
 
-                        foreach (var item in cart)
+                await strategy.ExecuteAsync(async () =>
+                {
+                    // Bắt đầu một transaction bên trong khối lệnh của strategy
+                    await using (var transaction = await _context.Database.BeginTransactionAsync())
+                    {
+                        try
                         {
-                            var productInDb = await _context.Products.FindAsync(item.ProductId);
-                            if (productInDb == null || productInDb.Stock < item.Quantity)
+                            // Thêm đơn hàng vào context
+                            _context.Orders.Add(finalOrder);
+                            // Lưu lại để lấy được OrderId cho các OrderDetail
+                            await _context.SaveChangesAsync();
+
+                            foreach (var item in cart)
                             {
-                                // Nếu sản phẩm không tồn tại hoặc không đủ hàng, hủy giao dịch
-                                throw new Exception($"Sản phẩm '{item.ProductName}' không đủ hàng.");
+                                var productInDb = await _context.Products.FindAsync(item.ProductId);
+                                if (productInDb == null || productInDb.Stock < item.Quantity)
+                                {
+                                    // Nếu sản phẩm không tồn tại hoặc không đủ hàng, ném lỗi để rollback
+                                    throw new Exception($"Sản phẩm '{item.ProductName}' không đủ hàng hoặc đã bị xóa.");
+                                }
+
+                                // Giảm số lượng tồn kho
+                                productInDb.Stock -= item.Quantity;
+
+                                // Tạo chi tiết đơn hàng
+                                var orderDetail = new OrderDetail
+                                {
+                                    OrderId = finalOrder.Id,
+                                    ProductId = item.ProductId,
+                                    Quantity = item.Quantity,
+                                    Price = item.Price
+                                };
+                                _context.OrderDetails.Add(orderDetail);
                             }
 
-                            // Giảm số lượng tồn kho
-                            productInDb.Stock -= item.Quantity;
-
-                            // Tạo chi tiết đơn hàng
-                            var orderDetail = new OrderDetail
-                            {
-                                OrderId = finalOrder.Id, // Gán OrderId đã được tạo
-                                ProductId = item.ProductId,
-                                Quantity = item.Quantity,
-                                Price = item.Price
-                            };
-                            _context.OrderDetails.Add(orderDetail);
+                            // Lưu lại tất cả các thay đổi (cập nhật tồn kho và thêm chi tiết đơn hàng)
+                            await _context.SaveChangesAsync();
+                            // Nếu mọi thứ thành công, xác nhận giao dịch
+                            await transaction.CommitAsync();
                         }
+                        catch (Exception)
+                        {
+                            // Nếu có lỗi, rollback và ném lỗi ra ngoài để strategy biết và thử lại
+                            await transaction.RollbackAsync();
+                            throw; // Quan trọng: Ném lại lỗi để strategy xử lý
+                        }
+                    }
+                });
 
-                        // Lưu lại tất cả các thay đổi (cập nhật tồn kho và thêm chi tiết đơn hàng)
-                        await _context.SaveChangesAsync();
-                        // Nếu mọi thứ thành công, xác nhận giao dịch
-                        await transaction.CommitAsync();
-                    }
-                    catch (Exception ex)
-                    {
-                        // Nếu có bất kỳ lỗi nào, hủy bỏ tất cả các thay đổi
-                        await transaction.RollbackAsync();
-                        // Ghi lại lỗi để hiển thị cho người dùng
-                        ModelState.AddModelError(string.Empty, "Đã xảy ra lỗi khi đặt hàng: " + ex.Message);
-                        // Quay lại trang checkout với thông báo lỗi
-                        return View("Checkout", checkoutInfo);
-                    }
+                if (!ModelState.IsValid)
+                {
+                    ModelState.AddModelError(string.Empty, "Đã xảy ra lỗi khi đặt hàng. Vui lòng thử lại.");
+                    return View("Checkout", checkoutInfo);
                 }
-                // **KẾT THÚC NÂNG CẤP**
 
                 HttpContext.Session.Remove("Cart");
                 TempData["SuccessMessage"] = "Bạn đã đặt hàng thành công!";
@@ -159,10 +167,8 @@ namespace WebBanHangOnline.Controllers
                 return RedirectToAction(nameof(MyOrders));
             }
 
-            // Cập nhật trạng thái đơn hàng thành "Đã hủy"
             order.Status = "Đã hủy";
 
-            // Hoàn lại số lượng tồn kho cho các sản phẩm
             foreach (var detail in order.OrderDetails)
             {
                 var product = detail.Product;
