@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "E:\\school\\TrienKhaiPhanMem\\WebBanHangOnline\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F5A0638F-85F3-4F9F-A9A6-88309A25FF67}|WebBanHangOnline\\WebBanHangOnline.csproj|e:\\school\\trienkhaiphanmem\\webbanhangonline\\webbanhangonline\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5A0638F-85F3-4F9F-A9A6-88309A25FF67}|WebBanHangOnline\\WebBanHangOnline.csproj|solutionrelative:webbanhangonline\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F5A0638F-85F3-4F9F-A9A6-88309A25FF67}|WebBanHangOnline\\WebBanHangOnline.csproj|e:\\school\\trienkhaiphanmem\\webbanhangonline\\webbanhangonline\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F5A0638F-85F3-4F9F-A9A6-88309A25FF67}|WebBanHangOnline\\WebBanHangOnline.csproj|solutionrelative:webbanhangonline\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -42,11 +46,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "E:\\school\\TrienKhaiPhanMem\\WebBanHangOnline\\WebBanHangOnline\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "WebBanHangOnline\\Controllers\\OrderController.cs",
+              "ToolTip": "E:\\school\\TrienKhaiPhanMem\\WebBanHangOnline\\WebBanHangOnline\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "WebBanHangOnline\\Controllers\\OrderController.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAkwKoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T09:22:10.28Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "AdminController.cs",
               "DocumentMoniker": "E:\\school\\TrienKhaiPhanMem\\WebBanHangOnline\\WebBanHangOnline\\Areas\\Admin\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "WebBanHangOnline\\Areas\\Admin\\Controllers\\AdminController.cs",
@@ -58,7 +75,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "AdminCategoryController.cs",
               "DocumentMoniker": "E:\\school\\TrienKhaiPhanMem\\WebBanHangOnline\\WebBanHangOnline\\Areas\\Admin\\Controllers\\AdminCategoryController.cs",
               "RelativeDocumentMoniker": "WebBanHangOnline\\Areas\\Admin\\Controllers\\AdminCategoryController.cs",
@@ -70,7 +87,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\school\\TrienKhaiPhanMem\\WebBanHangOnline\\WebBanHangOnline\\Areas\\Admin\\Views\\AdminProduct\\Index.cshtml",
               "RelativeDocumentMoniker": "WebBanHangOnline\\Areas\\Admin\\Views\\AdminProduct\\Index.cshtml",
@@ -82,7 +99,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "appsettings.json",
               "DocumentMoniker": "E:\\school\\TrienKhaiPhanMem\\WebBanHangOnline\\WebBanHangOnline\\appsettings.json",
               "RelativeDocumentMoniker": "WebBanHangOnline\\appsettings.json",
@@ -94,7 +111,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "WebBanHangOnline.csproj",
               "DocumentMoniker": "E:\\school\\TrienKhaiPhanMem\\WebBanHangOnline\\WebBanHangOnline\\WebBanHangOnline.csproj",
               "RelativeDocumentMoniker": "WebBanHangOnline\\WebBanHangOnline.csproj",
@@ -106,7 +123,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "AdminProductController.cs",
               "DocumentMoniker": "E:\\school\\TrienKhaiPhanMem\\WebBanHangOnline\\WebBanHangOnline\\Areas\\Admin\\Controllers\\AdminProductController.cs",
               "RelativeDocumentMoniker": "WebBanHangOnline\\Areas\\Admin\\Controllers\\AdminProductController.cs",
@@ -118,20 +135,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\school\\TrienKhaiPhanMem\\WebBanHangOnline\\WebBanHangOnline\\Program.cs",
               "RelativeDocumentMoniker": "WebBanHangOnline\\Program.cs",
               "ToolTip": "E:\\school\\TrienKhaiPhanMem\\WebBanHangOnline\\WebBanHangOnline\\Program.cs",
               "RelativeToolTip": "WebBanHangOnline\\Program.cs",
-              "ViewState": "AgIAAHgAAAAAAAAAAAAAAA8AAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-31T21:11:10.104Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "ProductController.cs",
               "DocumentMoniker": "E:\\school\\TrienKhaiPhanMem\\WebBanHangOnline\\WebBanHangOnline\\Controllers\\ProductController.cs",
               "RelativeDocumentMoniker": "WebBanHangOnline\\Controllers\\ProductController.cs",
